@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}Take a Quiz{% endblock %}
+
+{% block content %}
+<h2 class="text-xl font-semibold text-center">Category: {{ category_name }}</h2>
+<form id="quiz-form" class="mt-4">
+    {% for question in questions %}
+    <div class="mb-4">
+        <p class="font-bold">{{ question.question_text }}</p>
+        {% for option in question.options %}
+        <label class="block">
+            <input type="radio" name="question_{{ question.id }}" value="{{ option }}">
+            {{ option }}
+        </label>
+        {% endfor %}
+    </div>
+    {% endfor %}
+    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded">Submit</button>
+</form>
+<script>
+    document.getElementById('quiz-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        // Gather answers and send to backend for processing
+    });
+</script>
+{% endblock %}

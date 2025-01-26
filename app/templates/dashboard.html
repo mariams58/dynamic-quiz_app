@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2 class="text-xl font-bold mb-4">Your Dashboard</h2>
+<div class="bg-white shadow-md rounded p-6">
+    <h3 class="text-lg font-bold mb-2">Past Results</h3>
+    <table class="table-auto w-full border-collapse">
+        <thead>
+            <tr class="bg-gray-200">
+                <th class="border px-4 py-2">Date</th>
+                <th class="border px-4 py-2">Score</th>
+                <th class="border px-4 py-2">Total Questions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+            <tr>
+                <td class="border px-4 py-2">{{ result.date }}</td>
+                <td class="border px-4 py-2">{{ result.score }}</td>
+                <td class="border px-4 py-2">{{ result.total_questions }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
