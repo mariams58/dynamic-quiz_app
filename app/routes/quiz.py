@@ -2,6 +2,7 @@ import requests
 from flask import Blueprint, request, jsonify, session
 from app.models import Result, db
 from random import shuffle
+import time
 
 quiz_bp = Blueprint('quiz', __name__)
 
@@ -74,3 +75,20 @@ def submit_quiz():
     db.session.commit()
 
     return jsonify({'score': score, 'total_questions': total_questions}), 200
+
+quiz_bp.route('/results', methods=['GET'])
+def get_results():
+    if 'user_id' not in session:
+        return jsonify({'error': 'Unauthorized'}), 401
+
+    user_id = session['user_id']
+    results = Result.query.filter_by(user_id=user_id).all()
+    return jsonify([
+        {'score': r.score, 'total_questions': r.total_questions} for r in results
+    ])
+
+@quiz_bp.route('/timer', methods=['GET'])
+def timer():
+    start_time = time.time()
+    duration = request.args.get('duration', default=30, type=int)
+    return jsonify({'start_time': start_time, 'duration': duration}), 200
