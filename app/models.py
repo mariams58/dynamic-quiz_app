@@ -1,4 +1,5 @@
 from app import db
+from datetime import datetime
 
 #Writing The User class model
 class User(db.Model):
@@ -27,4 +28,5 @@ class Result(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     score = db.Column(db.Integer, nullable=False)
+    date = db.Column(db.DateTime, default=datetime.utcnow)
     total_questions = db.Column(db.Integer, nullable=False)

@@ -20,7 +20,7 @@ def login():
     if user and check_password_hash(user.password, data['password']):
         session['user_id'] = user.id
         session['is_admin'] = user.is_admin
-        return jsonify({'message': 'Login successful!'}), 200
+        return jsonify({'message': 'Login successful!', 'redirect': '/quiz/dashboard'}), 200
     return jsonify({'message': 'Invalid credentials'}), 401
 
 @auth_bp.route('/logout', methods=['POST'])

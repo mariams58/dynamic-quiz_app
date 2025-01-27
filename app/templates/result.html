@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block title %}Quiz Results{% endblock %}
+
+{% block content %}
+<h2 class="text-xl font-bold mb-4">Quiz Results</h2>
+<div class="bg-gray-200 shadow-md rounded p-6">
+    <p class="mb-4">Score: {{ score }} / {{ total_questions }}</p>
+    <a href="/" class="block text-center mt-4 text-blue-500">Take another quiz</a>
+</div>
+{% endblock %}
