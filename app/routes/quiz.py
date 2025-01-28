@@ -1,12 +1,17 @@
 import requests
-from flask import Blueprint, request, jsonify, session
-from app.models import Result, db
+from flask import Blueprint, render_template, request, jsonify, session
+from app.models import Result, Category, db
 from random import shuffle
 import time
 
 quiz_bp = Blueprint('quiz', __name__)
 
 OPENTDB_API_URL = "https://opentdb.com/api.php"
+
+@quiz_bp.route('/')
+def home():
+    return render_template('index.html')
+    #return jsonify({'categories': [{'id': c.id, 'name': c.name} for c in categories]}), 200
 
 @quiz_bp.route('/categories', methods=['GET'])
 def get_categories():
